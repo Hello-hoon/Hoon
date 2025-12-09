@@ -1,0 +1,25 @@
+/* style.css */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #1e1e2f; /* fond sombre */
+    color: #eee; /* texte clair */
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #6A0DAD;
+    padding: 20px;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.5em;
+    color: #fff;
+}
+
+p {
+    text-align: center;
+    font-size: 1.2em;
+}
