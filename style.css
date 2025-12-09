@@ -1,13 +1,13 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #FFFFFF;
+    background-color: #000000; /* fond noir */
     color: #eee;
     margin: 0;
     padding: 0;
 }
 
 header {
-    background-color: #6A0DAD;
+    background-color: #6A0DAD; /* couleur secondaire violet foncé */
     padding: 20px;
     text-align: center;
 }
@@ -39,6 +39,27 @@ header h1 {
     color: #eee;
     text-decoration: none;
     font-weight: bold;
+    transition: all 0.3s ease; /* animation douce */
+    position: relative;
+}
+
+.menu a:hover {
+    color: #ffdd00; /* couleur au survol */
+    transform: scale(1.1); /* légèrement plus grand */
+}
+
+.menu a::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 3px;
+    background: #ffdd00;
+    transition: width 0.3s;
+    margin-top: 5px;
+}
+
+.menu a:hover::after {
+    width: 100%; /* souligné animé au survol */
 }
 
 section {
@@ -47,11 +68,11 @@ section {
 }
 
 #projets {
-    background-color: #6A0DAD;
+    background-color: #1a0a33; /* un violet plus foncé pour la section projets */
 }
 
 footer {
-    background-color: #FFFFFF;
+    background-color: #6A0DAD; /* couleur secondaire violet foncé */
     color: #fff;
     text-align: center;
     padding: 20px;
