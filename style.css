@@ -1,25 +1,58 @@
-/* style.css */
 body {
     font-family: Arial, sans-serif;
-    background-color: #1e1e2f; /* fond sombre */
-    color: #eee; /* texte clair */
+    background-color: #1e1e2f;
+    color: #eee;
     margin: 0;
     padding: 0;
 }
 
 header {
-    background-color: #6A0DAD;
+    background-color: #4b00ff;
     padding: 20px;
     text-align: center;
 }
 
-header h1 {
-    margin: 0;
-    font-size: 2.5em;
-    color: #fff;
+.logo {
+    height: 60px;
+    vertical-align: middle;
+    margin-right: 10px;
 }
 
-p {
+header h1 {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.menu {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    padding: 10px 0 0 0;
+    margin: 0;
+}
+
+.menu li {
+    margin: 0 15px;
+}
+
+.menu a {
+    color: #eee;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+section {
     text-align: center;
-    font-size: 1.2em;
+    padding: 50px 20px;
+}
+
+#projets {
+    background-color: #2a2a3f;
+}
+
+footer {
+    background-color: #4b00ff;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
 }
