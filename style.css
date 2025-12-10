@@ -1,34 +1,31 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #000000; /* fond noir */
-    color: #eee;
+    background-color: #ffffff; /* fond blanc */
+    color: #333;
     margin: 0;
     padding: 0;
 }
 
+/* HEADER (barre violette en haut) */
 header {
-    background-color: #6A0DAD; /* couleur secondaire violet foncé */
-    padding: 20px;
-    text-align: center;
-}
-
-.logo {
-    height: 60px;
-    vertical-align: middle;
-    margin-right: 10px;
-}
-
-header h1 {
-    display: inline-block;
-    vertical-align: middle;
-}
-
-.menu {
+    background-color: #6A0DAD; /* violet */
+    padding: 15px;
     display: flex;
     justify-content: center;
+    align-items: center;
+}
+
+/* LOGO */
+.logo {
+    height: 60px;
+}
+
+/* MENU */
+.menu {
+    display: flex;
+    margin-left: 20px;
     list-style: none;
-    padding: 10px 0 0 0;
-    margin: 0;
+    padding: 0;
 }
 
 .menu li {
@@ -36,16 +33,16 @@ header h1 {
 }
 
 .menu a {
-    color: #eee;
+    color: #fff; /* texte menu blanc */
     text-decoration: none;
     font-weight: bold;
-    transition: all 0.3s ease; /* animation douce */
+    transition: all 0.3s ease;
     position: relative;
 }
 
 .menu a:hover {
-    color: #ffdd00; /* couleur au survol */
-    transform: scale(1.1); /* légèrement plus grand */
+    color: #ffdd00;
+    transform: scale(1.1);
 }
 
 .menu a::after {
@@ -59,21 +56,21 @@ header h1 {
 }
 
 .menu a:hover::after {
-    width: 100%; /* souligné animé au survol */
+    width: 100%;
 }
 
+/* SECTIONS BLANCHES */
 section {
+    background-color: #ffffff;
     text-align: center;
-    padding: 50px 20px;
+    padding: 60px 20px;
 }
 
-#projets {
-    background-color: #1a0a33; /* un violet plus foncé pour la section projets */
-}
-
+/* FOOTER VIOLET EN BAS */
 footer {
-    background-color: #6A0DAD; /* couleur secondaire violet foncé */
+    background-color: #6A0DAD;
     color: #fff;
     text-align: center;
     padding: 20px;
+    margin-top: 40px;
 }
