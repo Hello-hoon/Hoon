@@ -6,9 +6,12 @@
   <title>Hoon</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
+  <!-- ======================= HEADER ======================= -->
   <header>
+
     <!-- HAMBURGER -->
     <div class="hamburger" id="hamburger">
       <div class="bar"></div>
@@ -16,14 +19,14 @@
       <div class="bar"></div>
     </div>
 
-    <!-- TEXTE HOON -->
+    <!-- TITRE (remplace le logo) -->
     <div class="header-left">
       <h1 id="hoon-text">Hoon</h1>
     </div>
 
-    <!-- DROITE -->
+    <!-- OPTIONS DROITES -->
     <div class="header-right">
-      <button id="theme-toggle" aria-label="Basculer thème">🌙</button>
+      <button id="theme-toggle" aria-label="Thème">🌙</button>
       <input type="color" id="color-picker" value="#6A0DAD">
     </div>
 
@@ -34,64 +37,163 @@
         <li><a href="#mini-jeu">Mini-jeu</a></li>
         <li><a href="#target-game">Jeu de cible</a></li>
         <li><a href="#horloge">Horloge</a></li>
-        <li><a href="#chatbot">Chatbot</a></li>
+        <li><a href="#chatbot-advanced">Chatbot</a></li>
         <li><a href="#parametre">Paramètres</a></li>
         <li><a href="#aide">Aide</a></li>
       </ul>
     </div>
+
   </header>
 
 
+  <!-- ======================= BARRE DE COMPTE ======================= -->
+  <div id="accountBar" class="account-bar">
+    <div id="currentProfile" class="current-profile">
+      Pas de profil — <button id="openAccountBtn">Se connecter / Créer</button>
+    </div>
+  </div>
+
+  <!-- ======================= MODAL PROFILS ======================= -->
+  <div id="accountModal" class="modal hidden">
+    <div class="modal-inner">
+      <button class="close-modal" id="closeAccountModal">✕</button>
+
+      <h3>Profils Hoon</h3>
+
+      <section class="modal-section">
+        <h4>Se connecter</h4>
+        <div id="profileList"></div>
+      </section>
+
+      <section class="modal-section">
+        <h4>Créer un profil</h4>
+        <label>Pseudo
+          <input id="newName" placeholder="Ton pseudo">
+        </label>
+        <label>Avatar
+          <select id="avatarSelect">
+            <option value="🟣">🟣 Violet</option>
+            <option value="🐰">🐰 Bunny</option>
+            <option value="🚀">🚀 Rocket</option>
+            <option value="🎮">🎮 Game</option>
+            <option value="😎">😎 Cool</option>
+          </select>
+        </label>
+        <button id="createProfileBtn">Créer le profil</button>
+      </section>
+
+      <section class="modal-section">
+        <h4>Supprimer un profil</h4>
+        <small>Action locale, irréversible.</small>
+        <div id="deleteList"></div>
+      </section>
+
+    </div>
+  </div>
+
+
+  <!-- ======================= SECTION PERSONNALISATION ======================= -->
   <section id="personaliser" class="reveal">
     <h2>Personnalisation</h2>
-    <p>Changez la couleur principale ou le thème clair/sombre.</p>
+    <p>Choisissez la couleur principale et le thème clair/sombre.</p>
   </section>
 
+
+  <!-- ======================= MINI-JEU CLICKER ======================= -->
   <section id="mini-jeu" class="reveal">
     <h2>Mini-jeu Clicker</h2>
+
     <button id="clickBtn">Clique-moi !</button>
+
     <p>Points : <span id="points">0</span></p>
     <p>Niveau : <span id="level">1</span></p>
+
     <div id="badge-list"></div>
   </section>
 
+
+  <!-- ======================= JEU DE CIBLE ======================= -->
   <section id="target-game" class="reveal">
     <h2>Jeu de cible</h2>
+
     <div id="game-area">
       <div id="target"></div>
     </div>
+
     <p>Points : <span id="target-points">0</span></p>
   </section>
 
+
+  <!-- ======================= HORLOGE ======================= -->
   <section id="horloge" class="reveal">
     <h2>Horloge</h2>
+
     <div id="clock">
       <span id="hours">00</span> :
       <span id="minutes">00</span> :
       <span id="seconds">00</span>
     </div>
+
     <p id="date"></p>
   </section>
 
-  <section id="chatbot" class="reveal">
-    <h2>Chat Hoon</h2>
-    <div id="chat-messages"></div>
-    <input type="text" id="chat-input" placeholder="Écris un message...">
+
+  <!-- ======================= CHATBOT AVANCÉ ======================= -->
+  <section id="chatbot-advanced" class="reveal">
+    <h2>Chat Hoon (avancé)</h2>
+
+    <div id="chat-advanced-ui">
+
+      <div id="chat-advanced-header">
+        <div id="chat-user-info">Aucun profil</div>
+
+        <div id="chat-controls">
+          <button id="btnOpenTeach">Apprendre</button>
+          <button id="btnResetMemory">Oublier appris</button>
+        </div>
+      </div>
+
+      <div id="chat-advanced-messages"></div>
+
+      <div id="chat-advanced-input">
+        <input id="chatAdvancedInput" placeholder="Écris un message (ou /help)">
+        <button id="chatAdvancedSend">Envoyer</button>
+      </div>
+
+      <div id="teach-panel" class="hidden">
+        <h4>Mode apprentissage</h4>
+        <p>Question ➜ Réponse</p>
+
+        <input id="teachQuestion" placeholder="Question">
+        <input id="teachAnswer" placeholder="Réponse du bot">
+
+        <button id="teachSave">Enregistrer</button>
+        <button id="teachClose">Fermer</button>
+      </div>
+
+    </div>
   </section>
 
+
+  <!-- ======================= PARAMÈTRES ======================= -->
   <section id="parametre" class="reveal">
     <h2>Paramètres</h2>
-    <p>Options de réglage du site Hoon.</p>
+    <p>Ajustez vos préférences ici.</p>
   </section>
 
+
+  <!-- ======================= AIDE ======================= -->
   <section id="aide" class="reveal">
     <h2>Aide</h2>
-    <p>Bienvenue dans la section d’aide.</p>
+    <p>Bienvenue dans l’aide du site Hoon.</p>
   </section>
 
+
+  <!-- ======================= FOOTER ======================= -->
   <footer>
     © 2025 Hoon — Tous droits réservés.
   </footer>
+
 
   <script src="script.js"></script>
 </body>
