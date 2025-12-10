@@ -1,206 +1,91 @@
-:root {
-  --accent: #6A0DAD;
-  --background: #ffffff;
-  --text-color: #000000;
-}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hoon</title>
 
-/* RESET */
-body {
-  margin: 0;
-  background: var(--background);
-  color: var(--text-color);
-  font-family: Arial, sans-serif;
-}
+<!-- Style principal -->
+<link rel="stylesheet" href="style.css">
+</head>
 
-/* HEADER */
-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 12px 20px;
-  background: var(--background);
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-}
+<body>
 
-.header-left h1 {
-  margin: 0;
-  font-size: 2em;
-  color: var(--accent);
-  transition: color 0.3s, transform 0.3s;
-}
+<!-- HEADER -->
+<header>
+  <h1 id="site-title">Hoon</h1>
 
-/* ANIMATION HOON */
-@keyframes hoonColorPulse {
-  0%   { transform: scale(1); }
-  40%  { transform: scale(1.15); }
-  100% { transform: scale(1); }
-}
+  <!-- Icône menu -->
+  <div id="menu-toggle">&#9776;</div>
 
-.hoon-animate {
-  animation: hoonColorPulse 0.35s ease-out;
-}
+  <!-- Menu latéral -->
+  <nav id="menu">
+    <ul>
+      <li id="menu-personalize">Personnaliser</li>
+      <li id="menu-games">Jeux</li>
+      <li id="menu-shop">Boutique</li>
+      <li id="menu-leaderboard">Classement</li>
+      <li id="menu-help">Aide</li>
+    </ul>
+  </nav>
+</header>
 
-/* HAMBURGER */
-.hamburger {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 28px;
-  height: 22px;
-  cursor: pointer;
-}
+<!-- CONTENU PRINCIPAL -->
+<main>
 
-.bar {
-  width: 100%;
-  height: 4px;
-  background: var(--text-color);
-  transition: 0.3s;
-  border-radius: 2px;
-}
+  <!-- Accueil -->
+  <section id="home">
+    <h2>Bienvenue sur Hoon !</h2>
+    <p>Amuse-toi, personnalise ton expérience et gagne des HoonCoins.</p>
+  </section>
 
-.hamburger.active .bar:nth-child(1){
-  transform: rotate(45deg) translate(5px, 5px);
-}
-.hamburger.active .bar:nth-child(2){
-  opacity: 0;
-}
-.hamburger.active .bar:nth-child(3){
-  transform: rotate(-45deg) translate(5px, -5px);
-}
+  <!-- Leaderboard -->
+  <section id="leaderboard-section">
+    <h3>Classement Hoon</h3>
 
-/* MENU */
-.menu-dropdown {
-  display: none;
-  position: absolute;
-  top: 60px;
-  left: 15px;
-  background: var(--accent);
-  border-radius: 10px;
-  padding: 10px 0;
-  min-width: 150px;
-  z-index: 1000;
-}
+    <label>Filtrer :
+      <select id="leaderboard-filter">
+        <option value="world">Monde</option>
+        <option value="country">Pays</option>
+        <option value="region">Région</option>
+        <option value="city">Ville</option>
+      </select>
+    </label>
 
-.menu-dropdown ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
+    <table id="leaderboard-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Nom</th>
+          <th>HoonCoins</th>
+          <th>Ville</th>
+          <th>Région</th>
+          <th>Pays</th>
+          <th>Badges</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </section>
+</main>
 
-.menu-dropdown li a {
-  display: block;
-  padding: 10px 15px;
-  color: white;
-  font-weight: bold;
-  text-decoration: none;
-}
+<!-- NOTIFICATIONS -->
+<div id="notification-container"></div>
 
-.menu-dropdown li a:hover {
-  background: rgba(255,255,255,0.2);
-}
+<!-- CHAT -->
+<div id="chat-container">
+  <div id="chat-messages"></div>
+  <input type="text" id="chat-input" placeholder="Écrire un message...">
+  <button id="chat-send">Envoyer</button>
+</div>
 
-/* RIGHT SIDE */
-.header-right {
-  display: flex;
-  align-items: center;
-}
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
 
-#color-picker {
-  margin-left: 10px;
-  width: 35px;
-  height: 30px;
-  border: none;
-  cursor: pointer;
-}
+<!-- Script principal -->
+<script src="script.js"></script>
 
-/* SECTIONS */
-section {
-  padding: 50px 20px;
-  max-width: 900px;
-  margin: auto;
-}
-
-section h2 {
-  color: var(--accent);
-}
-
-/* MINI-JEU */
-#clickBtn {
-  padding: 10px 20px;
-  background: var(--accent);
-  color: white;
-  border-radius: 5px;
-  border: none;
-  cursor: pointer;
-}
-
-#badge-list span {
-  background: var(--accent);
-  color: white;
-  padding: 6px 10px;
-  display: inline-block;
-  border-radius: 5px;
-  margin: 4px;
-}
-
-/* TARGET GAME */
-#game-area {
-  width: 300px;
-  height: 300px;
-  background: #eee;
-  border-radius: 10px;
-  position: relative;
-}
-
-#target {
-  width: 50px;
-  height: 50px;
-  background: var(--accent);
-  border-radius: 50%;
-  position: absolute;
-}
-
-/* HORLOGE */
-#clock {
-  font-size: 2em;
-  font-weight: bold;
-}
-
-/* CHAT */
-#chat-messages {
-  height: 150px;
-  overflow-y: auto;
-  border: 1px solid #bbb;
-  padding: 5px;
-  border-radius: 5px;
-}
-
-#chat-input {
-  width: 100%;
-  padding: 6px;
-  margin-top: 5px;
-}
-
-/* FOOTER */
-footer {
-  background: var(--accent);
-  color: white;
-  text-align: center;
-  padding: 15px;
-  margin-top: 40px;
-}
-
-/* REVEAL */
-.reveal {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: 0.6s;
-}
-
-.reveal.active {
-  opacity: 1;
-  transform: translateY(0);
-}
+</body>
+</html>
