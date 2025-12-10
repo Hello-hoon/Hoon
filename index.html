@@ -9,10 +9,28 @@
 <body>
 
   <header>
+    <!-- HAMBURGER MENU -->
+    <div class="hamburger" id="hamburger">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div>
+
+    <div class="menu-dropdown" id="menuDropdown">
+      <ul>
+        <li><a href="#personaliser">Personnaliser</a></li>
+        <li><a href="#mini-jeu">Jeux</a></li>
+        <li><a href="#parametre">Paramètres</a></li>
+        <li><a href="#aide">Aide</a></li>
+      </ul>
+    </div>
+
+    <!-- LOGO -->
     <div class="header-left">
       <img src="Hoon.png" class="logo" alt="Logo Hoon">
     </div>
 
+    <!-- NAV -->
     <nav>
       <ul class="menu">
         <li><a href="#accueil">Accueil</a></li>
@@ -24,6 +42,7 @@
       </ul>
     </nav>
 
+    <!-- DROITE -->
     <div class="header-right">
       <button id="theme-toggle" aria-label="Basculer thème">🌙</button>
       <input type="color" id="color-picker" title="Choisir couleur primaire" value="#6A0DAD">
@@ -81,6 +100,7 @@
     © 2025 Hoon — Tous droits réservés.
   </footer>
 
+  <!-- CHATBOT -->
   <div id="chatbot">
     <div id="chat-header">Chat Hoon 💬</div>
     <div id="chat-messages"></div>
