@@ -1,156 +1,120 @@
-/* ===============================
-   COULEUR ET THÈME
-================================= */
-const themeToggle = document.getElementById('theme-toggle');
-const colorPicker = document.getElementById('color-picker');
-const hoonText = document.getElementById('hoon-text');
+/* ========================
+   COULEUR & ANIMATION
+======================== */
+const colorPicker = document.getElementById("color-picker");
+const hoonText = document.getElementById("hoon-text");
 
-themeToggle.addEventListener('click', () => {
-  if(document.body.style.backgroundColor === 'black'){
-    document.body.style.backgroundColor = '#fff';
-    document.body.style.color = '#000';
-    document.documentElement.style.setProperty('--background','#fff');
-    document.documentElement.style.setProperty('--text-color','#000');
-  } else {
-    document.body.style.backgroundColor = 'black';
-    document.body.style.color = 'white';
-    document.documentElement.style.setProperty('--background','black');
-    document.documentElement.style.setProperty('--text-color','white');
-  }
-});
-
-colorPicker.addEventListener('input', () => {
+colorPicker.addEventListener("input", () => {
   const color = colorPicker.value;
-  document.documentElement.style.setProperty('--accent', color);
+  document.documentElement.style.setProperty("--accent", color);
+
   hoonText.style.color = color;
-  localStorage.setItem('hoon-color', color);
+
+  // animation texte HOON
+  hoonText.classList.remove("hoon-animate");
+  void hoonText.offsetWidth;
+  hoonText.classList.add("hoon-animate");
 });
 
-/* ===============================
-   REVEAL SCROLL
-================================= */
-function reveal() {
-  const reveals = document.querySelectorAll('.reveal');
-  for(let i = 0; i < reveals.length; i++){
-    const windowHeight = window.innerHeight;
-    const elementTop = reveals[i].getBoundingClientRect().top;
-    const elementVisible = 150;
-    if(elementTop < windowHeight - elementVisible){
-      reveals[i].classList.add('active');
-    } else {
-      reveals[i].classList.remove('active');
-    }
-  }
-}
-window.addEventListener('scroll', reveal);
-
-/* ===============================
+/* ========================
    MINI-JEU CLICKER
-================================= */
+======================== */
 let points = 0;
 let level = 1;
-const clickBtn = document.getElementById('clickBtn');
-const pointsDisplay = document.getElementById('points');
-const levelDisplay = document.getElementById('level');
-const badgeList = document.getElementById('badge-list');
 
-clickBtn.addEventListener('click', () => {
+clickBtn.onclick = () => {
   points++;
   pointsDisplay.textContent = points;
   level = Math.floor(points / 10) + 1;
   levelDisplay.textContent = level;
 
   if(points === 10) addBadge("Débutant");
-  else if(points === 50) addBadge("Pro");
-  else if(points === 100) addBadge("Maître");
-});
+  if(points === 50) addBadge("Pro");
+  if(points === 100) addBadge("Maître");
+};
 
 function addBadge(name){
-  const span = document.createElement('span');
-  span.textContent = name;
-  badgeList.appendChild(span);
+  const b = document.createElement("span");
+  b.textContent = name;
+  badgeList.appendChild(b);
 }
 
-/* ===============================
-   JEU DE CIBLE
-================================= */
-let targetPoints = 0;
-const target = document.getElementById('target');
-const targetPointsDisplay = document.getElementById('target-points');
+/* ========================
+   TARGET GAME
+======================== */
+const target = document.getElementById("target");
+const gameArea = document.getElementById("game-area");
+let tgPoints = 0;
 
 function moveTarget(){
-  const gameArea = document.getElementById('game-area');
   const maxX = gameArea.clientWidth - target.clientWidth;
   const maxY = gameArea.clientHeight - target.clientHeight;
-  const x = Math.floor(Math.random() * maxX);
-  const y = Math.floor(Math.random() * maxY);
-  target.style.left = x + 'px';
-  target.style.top = y + 'px';
-}
 
-target.addEventListener('click', () => {
-  targetPoints++;
-  targetPointsDisplay.textContent = targetPoints;
+  target.style.left = Math.random()*maxX + "px";
+  target.style.top = Math.random()*maxY + "px";
+}
+target.onclick = () => {
+  tgPoints++;
+  document.getElementById("target-points").textContent = tgPoints;
   moveTarget();
-});
+};
 moveTarget();
 
-/* ===============================
-   HORLOGE ET DATE
-================================= */
-function updateClock(){
+/* ========================
+   HORLOGE
+======================== */
+function clockUpdate(){
   const now = new Date();
-  document.getElementById('hours').textContent = String(now.getHours()).padStart(2,'0');
-  document.getElementById('minutes').textContent = String(now.getMinutes()).padStart(2,'0');
-  document.getElementById('seconds').textContent = String(now.getSeconds()).padStart(2,'0');
-  document.getElementById('date').textContent = now.toLocaleDateString();
+  hours.textContent = String(now.getHours()).padStart(2, "0");
+  minutes.textContent = String(now.getMinutes()).padStart(2, "0");
+  seconds.textContent = String(now.getSeconds()).padStart(2, "0");
+  date.textContent = now.toLocaleDateString();
 }
-setInterval(updateClock, 1000);
-updateClock();
+setInterval(clockUpdate, 1000);
+clockUpdate();
 
-/* ===============================
+/* ========================
    CHAT SIMPLE
-================================= */
-const chatInput = document.getElementById('chat-input');
-const chatMessages = document.getElementById('chat-messages');
+======================== */
+chatInput.addEventListener("keydown", e => {
+  if(e.key === "Enter" && chatInput.value.trim() !== ""){
+    let msg = chatInput.value.trim();
+    chatMessages.innerHTML += `<p><strong>Vous :</strong> ${msg}</p>`;
+    chatInput.value = "";
 
-chatInput.addEventListener('keydown', function(e){
-  if(e.key === 'Enter'){
-    const msg = chatInput.value.trim();
-    if(msg !== ''){
-      const p = document.createElement('p');
-      p.textContent = "Vous : " + msg;
-      chatMessages.appendChild(p);
-      chatInput.value = '';
-      chatMessages.scrollTop = chatMessages.scrollHeight;
+    chatMessages.innerHTML += `<p><strong>HoonBot :</strong> Merci !</p>`;
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
+});
 
-      const botP = document.createElement('p');
-      botP.textContent = "HoonBot : Merci pour ton message !";
-      chatMessages.appendChild(botP);
-      chatMessages.scrollTop = chatMessages.scrollHeight;
+/* ========================
+   REVEAL SCROLL
+======================== */
+function reveal(){
+  document.querySelectorAll(".reveal").forEach(el => {
+    let top = el.getBoundingClientRect().top;
+    if(top < window.innerHeight - 150){
+      el.classList.add("active");
     }
-  }
-});
+  });
+}
+window.addEventListener("scroll", reveal);
 
-/* ===============================
+/* ========================
    HAMBURGER MENU
-================================= */
-const hamburger = document.getElementById('hamburger');
-const menuDropdown = document.getElementById('menuDropdown');
+======================== */
+const hamburger = document.getElementById("hamburger");
+const menuDropdown = document.getElementById("menuDropdown");
 
-hamburger.addEventListener('click', () => {
-  hamburger.classList.toggle('active');
-  if(menuDropdown.style.display === 'block'){
-    menuDropdown.style.display = 'none';
-  } else {
-    menuDropdown.style.display = 'block';
-  }
-});
+hamburger.onclick = () => {
+  hamburger.classList.toggle("active");
+  menuDropdown.style.display =
+    menuDropdown.style.display === "block" ? "none" : "block";
+};
 
-// Fermer menu si clic en dehors
-document.addEventListener('click', function(event){
-  if(!hamburger.contains(event.target) && !menuDropdown.contains(event.target)){
-    menuDropdown.style.display = 'none';
-    hamburger.classList.remove('active');
+document.addEventListener("click", (e) => {
+  if(!hamburger.contains(e.target) && !menuDropdown.contains(e.target)){
+    menuDropdown.style.display = "none";
+    hamburger.classList.remove("active");
   }
 });
