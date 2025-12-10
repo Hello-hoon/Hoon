@@ -1,4 +1,4 @@
-/* Variables de thème */
+/* Variables thème */
 :root{
   --bg: #ffffff;
   --text: #222222;
@@ -86,7 +86,7 @@ header {
   width: 100%;
 }
 
-/* Bouton changement thème */
+/* Bouton thème */
 #theme-toggle {
   background: transparent;
   border: 2px solid rgba(255,255,255,0.25);
@@ -102,7 +102,7 @@ header {
   transform: scale(0.95);
 }
 
-/* Sections avec animation */
+/* SECTIONS */
 section {
   background: var(--section-bg);
   text-align: center;
@@ -117,10 +117,147 @@ section.visible {
   transform: translateY(0);
 }
 
-/* Footer */
+/* FOOTER */
 footer {
   background: var(--accent);
   color: #fff;
   text-align: center;
   padding: 30px;
+}
+
+/* MINI-JEU CLICKER */
+#mini-jeu {
+  background: #f4f4f4;
+  padding: 60px 20px;
+  border-radius: 12px;
+}
+
+#mini-jeu button {
+  background-color: var(--accent);
+  color: #fff;
+  font-size: 18px;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+#mini-jeu button:hover {
+  background-color: #7e19c6;
+  transform: scale(1.05);
+}
+
+#mini-jeu p {
+  font-size: 18px;
+  margin-top: 10px;
+}
+
+/* BADGES */
+#badges {
+  margin-top: 20px;
+  text-align: center;
+}
+
+#badge-list {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.badge {
+  background-color: var(--accent);
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+/* JEU CIBLE */
+#game-area {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  margin: 20px auto;
+  background: #f4f4f4;
+  border: 2px solid var(--accent);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+#target {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background: var(--accent);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/* HORLOGE */
+#horloge {
+  background: #ffffff;
+  padding: 60px 20px;
+  border-radius: 12px;
+  color: var(--accent);
+}
+
+#clock {
+  font-size: 48px;
+  font-weight: bold;
+  margin-top: 15px;
+}
+
+#date {
+  font-size: 20px;
+  margin-top: 8px;
+  color: #222;
+}
+
+/* CHATBOT */
+#chatbot {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 250px;
+  max-height: 400px;
+  background: #ffffff;
+  border: 2px solid var(--accent);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  font-family: Arial, sans-serif;
+  z-index: 1000;
+}
+
+#chat-header {
+  background: var(--accent);
+  color: #fff;
+  padding: 8px;
+  text-align: center;
+  font-weight: bold;
+}
+
+#chat-messages {
+  flex: 1;
+  padding: 8px;
+  overflow-y: auto;
+  font-size: 14px;
+}
+
+#chat-input {
+  border: none;
+  border-top: 1px solid var(--accent);
+  padding: 8px;
+  font-size: 14px;
+  outline: none;
+}
+
+/* Smooth scroll */
+html {
+  scroll-behavior: smooth;
 }
