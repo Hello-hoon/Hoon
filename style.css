@@ -1,3 +1,63 @@
+/* VARIABLES */
+:root {
+  --accent: #6A0DAD;
+  --background: #fff;
+  --text-color: #000;
+  --menu-text: #000;
+}
+
+/* GÉNÉRAL */
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  background-color: var(--background);
+  color: var(--text-color);
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  position: sticky;
+  top: 0;
+  background-color: var(--background);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  z-index: 1000;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  height: 55px;
+  transition: filter 0.3s ease;
+}
+
+/* NAV MENU */
+nav ul.menu {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+nav ul.menu li {
+  margin-left: 15px;
+}
+
+nav ul.menu li a {
+  text-decoration: none;
+  color: var(--text-color);
+  font-weight: bold;
+}
+
+nav ul.menu li a:hover {
+  color: var(--accent);
+}
+
 /* HAMBURGER */
 .hamburger {
   display: flex;
@@ -62,4 +122,141 @@
   transform: rotate(-45deg) translate(5px, -5px);
 }
 
-/* …reste du CSS Hoon (déjà fourni avant) */
+/* HEADER DROITE */
+.header-right {
+  display: flex;
+  align-items: center;
+}
+
+#color-picker {
+  margin-left: 10px;
+  cursor: pointer;
+  width: 35px;
+  height: 30px;
+  border: none;
+  padding: 0;
+}
+
+/* SECTIONS */
+section {
+  padding: 50px 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+section h2 {
+  color: var(--accent);
+}
+
+/* MINI-JEU CLICKER */
+#clickBtn {
+  padding: 10px 20px;
+  background-color: var(--accent);
+  border: none;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+
+#clickBtn:hover {
+  background-color: #52006d;
+}
+
+#badges {
+  margin-top: 15px;
+}
+
+#badge-list span {
+  display: inline-block;
+  padding: 5px 10px;
+  margin-right: 5px;
+  background-color: var(--accent);
+  color: #fff;
+  border-radius: 5px;
+  margin-top: 5px;
+}
+
+/* JEU CIBLE */
+#game-area {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  background-color: #eee;
+  border-radius: 10px;
+  margin-top: 15px;
+}
+
+#target {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background-color: var(--accent);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/* HORLOGE */
+#clock {
+  font-size: 2em;
+  font-weight: bold;
+}
+
+#date {
+  margin-top: 5px;
+  font-size: 1em;
+}
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 15px;
+  background-color: var(--accent);
+  color: #fff;
+}
+
+/* CHATBOT */
+#chatbot {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  width: 250px;
+  background: var(--background);
+  border: 2px solid var(--accent);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+#chat-header {
+  background-color: var(--accent);
+  color: #fff;
+  padding: 8px;
+  border-radius: 8px 8px 0 0;
+  font-weight: bold;
+}
+
+#chat-messages {
+  height: 150px;
+  overflow-y: auto;
+  padding: 5px;
+}
+
+#chat-input {
+  width: calc(100% - 10px);
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 0 0 8px 8px;
+}
+
+/* REVEAL ON SCROLL */
+.reveal {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: 0.7s ease-out;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
