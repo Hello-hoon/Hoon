@@ -1,263 +1,65 @@
-/* Variables thème */
-:root{
-  --bg: #ffffff;
-  --text: #222222;
-  --accent: #6A0DAD;
-  --menu-text: #ffffff;
-  --highlight: #ffdd00;
-  --section-bg: #ffffff;
-}
-
-/* Mode sombre */
-.dark {
-  --bg: #0b0710;
-  --text: #e6e6e6;
-  --accent: #6A0DAD;
-  --menu-text: #ffffff;
-  --highlight: #ffd94d;
-  --section-bg: #130d1b;
-}
-
-body {
-  font-family: Arial, sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  margin: 0;
-  padding: 0;
-  transition: background 0.35s ease, color 0.35s ease;
-}
-
-/* HEADER */
-header {
-  background-color: var(--accent);
-  height: 80px;
+/* HAMBURGER */
+.hamburger {
   display: flex;
-  align-items: center;
-  padding: 0 24px;
+  flex-direction: column;
   justify-content: space-between;
+  width: 28px;
+  height: 22px;
+  cursor: pointer;
+  margin-right: 15px;
 }
 
-.header-left, .header-right {
-  display: flex;
-  align-items: center;
-}
-
-.logo {
-  height: 55px;
-}
-
-/* MENU */
-.menu {
-  display: flex;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.menu li {
-  margin-left: 20px;
-}
-
-.menu a {
-  color: var(--menu-text);
-  text-decoration: none;
-  font-weight: bold;
-  transition: transform .25s ease, color .25s ease;
-  position: relative;
-}
-
-.menu a:hover {
-  color: var(--highlight);
-  transform: scale(1.05);
-}
-
-.menu a::after {
-  content: "";
-  width: 0;
-  height: 3px;
-  background: var(--highlight);
-  position: absolute;
-  left: 0;
-  bottom: -5px;
+.bar {
+  height: 4px;
+  width: 100%;
+  background-color: var(--menu-text);
+  border-radius: 2px;
   transition: 0.3s;
 }
 
-.menu a:hover::after {
-  width: 100%;
-}
-
-/* Bouton thème */
-#theme-toggle {
-  background: transparent;
-  border: 2px solid rgba(255,255,255,0.25);
-  color: var(--menu-text);
-  padding: 8px 12px;
-  border-radius: 10px;
-  cursor: pointer;
-  font-size: 18px;
-  transition: 0.2s;
-}
-
-#theme-toggle:active {
-  transform: scale(0.95);
-}
-
-/* SECTIONS */
-section {
-  background: var(--section-bg);
-  text-align: center;
-  padding: 80px 20px;
-  opacity: 0;
-  transform: translateY(40px);
-  transition: all 0.6s ease-out;
-}
-
-section.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* FOOTER */
-footer {
-  background: var(--accent);
-  color: #fff;
-  text-align: center;
-  padding: 30px;
-}
-
-/* MINI-JEU CLICKER */
-#mini-jeu {
-  background: #f4f4f4;
-  padding: 60px 20px;
-  border-radius: 12px;
-}
-
-#mini-jeu button {
-  background-color: var(--accent);
-  color: #fff;
-  font-size: 18px;
-  padding: 12px 24px;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-#mini-jeu button:hover {
-  background-color: #7e19c6;
-  transform: scale(1.05);
-}
-
-#mini-jeu p {
-  font-size: 18px;
-  margin-top: 10px;
-}
-
-/* BADGES */
-#badges {
-  margin-top: 20px;
-  text-align: center;
-}
-
-#badge-list {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 10px;
-}
-
-.badge {
-  background-color: var(--accent);
-  color: #fff;
-  padding: 8px 12px;
-  border-radius: 10px;
-  font-weight: bold;
-  font-size: 14px;
-}
-
-/* JEU CIBLE */
-#game-area {
-  position: relative;
-  width: 300px;
-  height: 300px;
-  margin: 20px auto;
-  background: #f4f4f4;
-  border: 2px solid var(--accent);
-  border-radius: 12px;
-  overflow: hidden;
-}
-
-#target {
+/* MENU DROPDOWN */
+.menu-dropdown {
   position: absolute;
-  width: 40px;
-  height: 40px;
+  top: 70px;
+  left: 10px;
   background: var(--accent);
-  border-radius: 50%;
-  cursor: pointer;
-}
-
-/* HORLOGE */
-#horloge {
-  background: #ffffff;
-  padding: 60px 20px;
-  border-radius: 12px;
-  color: var(--accent);
-}
-
-#clock {
-  font-size: 48px;
-  font-weight: bold;
-  margin-top: 15px;
-}
-
-#date {
-  font-size: 20px;
-  margin-top: 8px;
-  color: #222;
-}
-
-/* CHATBOT */
-#chatbot {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  width: 250px;
-  max-height: 400px;
-  background: #ffffff;
-  border: 2px solid var(--accent);
-  border-radius: 12px;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  font-family: Arial, sans-serif;
+  border-radius: 10px;
+  display: none;
+  min-width: 150px;
   z-index: 1000;
 }
 
-#chat-header {
-  background: var(--accent);
+.menu-dropdown ul {
+  list-style: none;
+  margin: 0;
+  padding: 10px 0;
+}
+
+.menu-dropdown li {
+  padding: 8px 15px;
+}
+
+.menu-dropdown li a {
   color: #fff;
-  padding: 8px;
-  text-align: center;
+  text-decoration: none;
   font-weight: bold;
+  display: block;
 }
 
-#chat-messages {
-  flex: 1;
-  padding: 8px;
-  overflow-y: auto;
-  font-size: 14px;
+.menu-dropdown li a:hover {
+  background-color: rgba(255,255,255,0.2);
+  border-radius: 5px;
 }
 
-#chat-input {
-  border: none;
-  border-top: 1px solid var(--accent);
-  padding: 8px;
-  font-size: 14px;
-  outline: none;
+/* ANIMATION HAMBURGER */
+.hamburger.active .bar:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+.hamburger.active .bar:nth-child(2) {
+  opacity: 0;
+}
+.hamburger.active .bar:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
 }
 
-/* Smooth scroll */
-html {
-  scroll-behavior: smooth;
-}
+/* …reste du CSS Hoon (déjà fourni avant) */
