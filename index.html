@@ -9,59 +9,45 @@
 <body>
 
   <header>
-    <!-- HAMBURGER MENU -->
+    <!-- HAMBURGER -->
     <div class="hamburger" id="hamburger">
       <div class="bar"></div>
       <div class="bar"></div>
       <div class="bar"></div>
     </div>
 
-    <div class="menu-dropdown" id="menuDropdown">
-      <ul>
-        <li><a href="#personaliser">Personnaliser</a></li>
-        <li><a href="#mini-jeu">Jeux</a></li>
-        <li><a href="#parametre">Paramètres</a></li>
-        <li><a href="#aide">Aide</a></li>
-      </ul>
-    </div>
-
-    <!-- LOGO SVG -->
+    <!-- TEXTE Hoon -->
     <div class="header-left">
-      <object type="image/svg+xml" data="Honn.svg" class="logo" id="logo"></object>
+      <h1 id="hoon-text">Hoon</h1>
     </div>
-
-    <!-- NAV -->
-    <nav>
-      <ul class="menu">
-        <li><a href="#accueil">Accueil</a></li>
-        <li><a href="#projets">Projets</a></li>
-        <li><a href="#mini-jeu">Mini-jeu</a></li>
-        <li><a href="#target-game">Cible</a></li>
-        <li><a href="#horloge">Horloge</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
 
     <!-- DROITE -->
     <div class="header-right">
       <button id="theme-toggle" aria-label="Basculer thème">🌙</button>
-      <input type="color" id="color-picker" title="Choisir couleur primaire" value="#6A0DAD">
+      <input type="color" id="color-picker" title="Choisir couleur principale" value="#6A0DAD">
+    </div>
+
+    <!-- MENU DROPDOWN -->
+    <div class="menu-dropdown" id="menuDropdown">
+      <ul>
+        <li><a href="#personaliser">Personnaliser</a></li>
+        <li><a href="#mini-jeu">Mini-jeu</a></li>
+        <li><a href="#target-game">Jeu de cible</a></li>
+        <li><a href="#horloge">Horloge</a></li>
+        <li><a href="#chatbot">Chatbot</a></li>
+        <li><a href="#parametre">Paramètres</a></li>
+        <li><a href="#aide">Aide</a></li>
+      </ul>
     </div>
   </header>
 
-  <section id="accueil" class="reveal">
-    <h2>Bienvenue sur Hoon</h2>
-    <p>Le site officiel de mes projets et créations.</p>
-  </section>
-
-  <section id="projets" class="reveal">
-    <h2>Projets</h2>
-    <p>Découvrez mes projets tech, web et Minecraft.</p>
+  <section id="personaliser" class="reveal">
+    <h2>Personnalisation</h2>
+    <p>Choisissez votre couleur principale et basculez le thème clair/sombre.</p>
   </section>
 
   <section id="mini-jeu" class="reveal">
     <h2>Mini-jeu Clicker Hoon</h2>
-    <p>Cliquez sur le bouton pour gagner des points !</p>
     <button id="clickBtn">Cliquez-moi !</button>
     <p>Points : <span id="points">0</span></p>
     <p>Niveau : <span id="level">1</span></p>
@@ -73,7 +59,6 @@
 
   <section id="target-game" class="reveal">
     <h2>Jeu de cible Hoon</h2>
-    <p>Clique sur la cible pour gagner des points !</p>
     <div id="game-area">
       <div id="target"></div>
     </div>
@@ -82,7 +67,6 @@
 
   <section id="horloge" class="reveal">
     <h2>Horloge Hoon</h2>
-    <p>Heure et date en temps réel :</p>
     <div id="clock">
       <span id="hours">00</span> :
       <span id="minutes">00</span> :
@@ -91,21 +75,25 @@
     <p id="date"></p>
   </section>
 
-  <section id="contact" class="reveal">
-    <h2>Contact</h2>
-    <p>Mes réseaux seront bientôt disponibles.</p>
+  <section id="chatbot" class="reveal">
+    <h2>Chat Hoon 💬</h2>
+    <div id="chat-messages"></div>
+    <input type="text" id="chat-input" placeholder="Écris un message...">
+  </section>
+
+  <section id="parametre" class="reveal">
+    <h2>Paramètres</h2>
+    <p>Configurez votre expérience Hoon.</p>
+  </section>
+
+  <section id="aide" class="reveal">
+    <h2>Aide</h2>
+    <p>Besoin d’aide ? Toutes les informations seront disponibles ici.</p>
   </section>
 
   <footer>
     © 2025 Hoon — Tous droits réservés.
   </footer>
-
-  <!-- CHATBOT -->
-  <div id="chatbot">
-    <div id="chat-header">Chat Hoon 💬</div>
-    <div id="chat-messages"></div>
-    <input type="text" id="chat-input" placeholder="Écris un message...">
-  </div>
 
   <script src="script.js"></script>
 </body>
