@@ -3,7 +3,7 @@
 ================================= */
 const themeToggle = document.getElementById('theme-toggle');
 const colorPicker = document.getElementById('color-picker');
-const logo = document.getElementById('logo');
+const hoonText = document.getElementById('hoon-text');
 
 themeToggle.addEventListener('click', () => {
   if(document.body.style.backgroundColor === 'black'){
@@ -22,13 +22,7 @@ themeToggle.addEventListener('click', () => {
 colorPicker.addEventListener('input', () => {
   const color = colorPicker.value;
   document.documentElement.style.setProperty('--accent', color);
-
-  // Modifier le SVG pour qu'il prenne la couleur
-  if(logo && logo.contentDocument){
-    const svgText = logo.contentDocument.querySelector('text');
-    if(svgText) svgText.setAttribute('fill', color);
-  }
-
+  hoonText.style.color = color;
   localStorage.setItem('hoon-color', color);
 });
 
@@ -66,13 +60,9 @@ clickBtn.addEventListener('click', () => {
   level = Math.floor(points / 10) + 1;
   levelDisplay.textContent = level;
 
-  if(points === 10){
-    addBadge("Débutant");
-  } else if(points === 50){
-    addBadge("Pro");
-  } else if(points === 100){
-    addBadge("Maître");
-  }
+  if(points === 10) addBadge("Débutant");
+  else if(points === 50) addBadge("Pro");
+  else if(points === 100) addBadge("Maître");
 });
 
 function addBadge(name){
@@ -150,16 +140,16 @@ const menuDropdown = document.getElementById('menuDropdown');
 
 hamburger.addEventListener('click', () => {
   hamburger.classList.toggle('active');
-  if(menuDropdown.style.display === 'block') {
+  if(menuDropdown.style.display === 'block'){
     menuDropdown.style.display = 'none';
   } else {
     menuDropdown.style.display = 'block';
   }
 });
 
-// Fermer menu si clic à l’extérieur
-document.addEventListener('click', function(event) {
-  if(!hamburger.contains(event.target) && !menuDropdown.contains(event.target)) {
+// Fermer menu si clic en dehors
+document.addEventListener('click', function(event){
+  if(!hamburger.contains(event.target) && !menuDropdown.contains(event.target)){
     menuDropdown.style.display = 'none';
     hamburger.classList.remove('active');
   }
