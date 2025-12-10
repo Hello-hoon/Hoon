@@ -3,6 +3,7 @@
 ================================= */
 const themeToggle = document.getElementById('theme-toggle');
 const colorPicker = document.getElementById('color-picker');
+const logo = document.getElementById('logo');
 
 themeToggle.addEventListener('click', () => {
   if(document.body.style.backgroundColor === 'black'){
@@ -21,9 +22,13 @@ themeToggle.addEventListener('click', () => {
 colorPicker.addEventListener('input', () => {
   const color = colorPicker.value;
   document.documentElement.style.setProperty('--accent', color);
-  // Changer la couleur du logo si souhaité
-  const logo = document.querySelector('.logo');
-  if(logo) logo.style.filter = `drop-shadow(0 0 0 ${color})`;
+
+  // Modifier le SVG pour qu'il prenne la couleur
+  if(logo && logo.contentDocument){
+    const svgText = logo.contentDocument.querySelector('text');
+    if(svgText) svgText.setAttribute('fill', color);
+  }
+
   localStorage.setItem('hoon-color', color);
 });
 
@@ -128,7 +133,7 @@ chatInput.addEventListener('keydown', function(e){
       chatMessages.appendChild(p);
       chatInput.value = '';
       chatMessages.scrollTop = chatMessages.scrollHeight;
-      // Réponse automatique simple
+
       const botP = document.createElement('p');
       botP.textContent = "HoonBot : Merci pour ton message !";
       chatMessages.appendChild(botP);
