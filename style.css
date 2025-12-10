@@ -1,91 +1,220 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hoon</title>
+/* ------------------------------
+   VARIABLES GLOBALES DU THEME
+------------------------------ */
+:root {
+    --main-color: #6A0DAD;     /* Violet principal */
+    --text-color: #000;        /* Noir par défaut */
+    --bg-color: #fff;          /* Fond blanc */
+}
 
-<!-- Style principal -->
-<link rel="stylesheet" href="style.css">
-</head>
+/* Appliquer le thème sauvegardé */
+body.theme-dark {
+    --bg-color: #181818;
+    --text-color: #fff;
+}
 
-<body>
+/* ------------------------------
+   GLOBAL
+------------------------------ */
+body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg-color);
+    color: var(--text-color);
+    font-family: Arial, sans-serif;
+    transition: background 0.3s, color 0.3s;
+}
 
-<!-- HEADER -->
-<header>
-  <h1 id="site-title">Hoon</h1>
+h1, h2, h3 {
+    margin: 0;
+}
 
-  <!-- Icône menu -->
-  <div id="menu-toggle">&#9776;</div>
+/* ------------------------------
+   HEADER
+------------------------------ */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 20px;
+    background: var(--main-color);
+    color: white;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
 
-  <!-- Menu latéral -->
-  <nav id="menu">
-    <ul>
-      <li id="menu-personalize">Personnaliser</li>
-      <li id="menu-games">Jeux</li>
-      <li id="menu-shop">Boutique</li>
-      <li id="menu-leaderboard">Classement</li>
-      <li id="menu-help">Aide</li>
-    </ul>
-  </nav>
-</header>
+#site-title {
+    font-size: 28px;
+    transition: color 0.3s;
+}
 
-<!-- CONTENU PRINCIPAL -->
-<main>
+/* Bouton menu (3 barres) */
+#menu-toggle {
+    font-size: 28px;
+    cursor: pointer;
+    user-select: none;
+    transition: transform 0.3s;
+}
 
-  <!-- Accueil -->
-  <section id="home">
-    <h2>Bienvenue sur Hoon !</h2>
-    <p>Amuse-toi, personnalise ton expérience et gagne des HoonCoins.</p>
-  </section>
+#menu-toggle.open {
+    transform: rotate(90deg);
+}
 
-  <!-- Leaderboard -->
-  <section id="leaderboard-section">
-    <h3>Classement Hoon</h3>
+/* ------------------------------
+   MENU LATÉRAL
+------------------------------ */
+#menu {
+    position: fixed;
+    top: 0;
+    left: -260px;
+    width: 250px;
+    height: 100%;
+    background: white;
+    color: black;
+    border-right: 3px solid var(--main-color);
+    box-shadow: 3px 0 10px rgba(0,0,0,0.2);
+    transition: left 0.3s;
+    z-index: 999;
+}
 
-    <label>Filtrer :
-      <select id="leaderboard-filter">
-        <option value="world">Monde</option>
-        <option value="country">Pays</option>
-        <option value="region">Région</option>
-        <option value="city">Ville</option>
-      </select>
-    </label>
+#menu.open {
+    left: 0;
+}
 
-    <table id="leaderboard-table">
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Nom</th>
-          <th>HoonCoins</th>
-          <th>Ville</th>
-          <th>Région</th>
-          <th>Pays</th>
-          <th>Badges</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
-  </section>
-</main>
+#menu ul {
+    list-style: none;
+    padding: 20px;
+}
 
-<!-- NOTIFICATIONS -->
-<div id="notification-container"></div>
+#menu li {
+    padding: 12px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: background 0.2s;
+}
 
-<!-- CHAT -->
-<div id="chat-container">
-  <div id="chat-messages"></div>
-  <input type="text" id="chat-input" placeholder="Écrire un message...">
-  <button id="chat-send">Envoyer</button>
-</div>
+#menu li:hover {
+    background: var(--main-color);
+    color: white;
+}
 
-<!-- Firebase -->
-<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+/* ------------------------------
+   SECTIONS
+------------------------------ */
+main {
+    padding: 25px;
+}
 
-<!-- Script principal -->
-<script src="script.js"></script>
+section {
+    margin-bottom: 50px;
+    padding: 20px;
+    border-radius: 10px;
+    background: white;
+    border: 1px solid #ddd;
+    transition: background 0.3s, color 0.3s;
+}
 
-</body>
-</html>
+/* Leaderboard table */
+#leaderboard-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+#leaderboard-table th, #leaderboard-table td {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    text-align: left;
+}
+
+/* ------------------------------
+   CHAT
+------------------------------ */
+#chat-container {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    width: 300px;
+    background: white;
+    border: 2px solid var(--main-color);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+#chat-messages {
+    height: 250px;
+    padding: 10px;
+    overflow-y: auto;
+}
+
+#chat-input {
+    border: none;
+    padding: 10px;
+    border-top: 1px solid #ddd;
+    outline: none;
+}
+
+#chat-send {
+    border: none;
+    padding: 12px;
+    background: var(--main-color);
+    color: white;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+#chat-send:hover {
+    background: #580c88;
+}
+
+/* Messages */
+.message-user {
+    text-align: right;
+    margin-bottom: 10px;
+    color: var(--main-color);
+}
+
+.message-bot {
+    text-align: left;
+    margin-bottom: 10px;
+    color: black;
+}
+
+/* ------------------------------
+   NOTIFICATIONS
+------------------------------ */
+#notification-container {
+    position: fixed;
+    right: 20px;
+    top: 20px;
+    width: 260px;
+    z-index: 2000;
+}
+
+.notification {
+    background: var(--main-color);
+    color: white;
+    padding: 12px;
+    margin-bottom: 12px;
+    border-radius: 8px;
+    animation: fadein 0.4s;
+}
+
+@keyframes fadein {
+    from { opacity: 0; transform: translateY(-10px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ------------------------------
+   RESPONSIVE
+------------------------------ */
+@media (max-width: 700px) {
+    #chat-container {
+        width: 90%;
+        right: 5%;
+    }
+}
