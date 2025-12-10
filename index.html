@@ -1,200 +1,91 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Hoon</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hoon</title>
+
+<!-- Style principal -->
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-  <!-- ======================= HEADER ======================= -->
-  <header>
+<!-- HEADER -->
+<header>
+  <h1 id="site-title">Hoon</h1>
 
-    <!-- HAMBURGER -->
-    <div class="hamburger" id="hamburger">
-      <div class="bar"></div>
-      <div class="bar"></div>
-      <div class="bar"></div>
-    </div>
+  <!-- Icône menu -->
+  <div id="menu-toggle">&#9776;</div>
 
-    <!-- TITRE (remplace le logo) -->
-    <div class="header-left">
-      <h1 id="hoon-text">Hoon</h1>
-    </div>
+  <!-- Menu latéral -->
+  <nav id="menu">
+    <ul>
+      <li id="menu-personalize">Personnaliser</li>
+      <li id="menu-games">Jeux</li>
+      <li id="menu-shop">Boutique</li>
+      <li id="menu-leaderboard">Classement</li>
+      <li id="menu-help">Aide</li>
+    </ul>
+  </nav>
+</header>
 
-    <!-- OPTIONS DROITES -->
-    <div class="header-right">
-      <button id="theme-toggle" aria-label="Thème">🌙</button>
-      <input type="color" id="color-picker" value="#6A0DAD">
-    </div>
+<!-- CONTENU PRINCIPAL -->
+<main>
 
-    <!-- MENU DÉROULANT -->
-    <div class="menu-dropdown" id="menuDropdown">
-      <ul>
-        <li><a href="#personaliser">Personnaliser</a></li>
-        <li><a href="#mini-jeu">Mini-jeu</a></li>
-        <li><a href="#target-game">Jeu de cible</a></li>
-        <li><a href="#horloge">Horloge</a></li>
-        <li><a href="#chatbot-advanced">Chatbot</a></li>
-        <li><a href="#parametre">Paramètres</a></li>
-        <li><a href="#aide">Aide</a></li>
-      </ul>
-    </div>
-
-  </header>
-
-
-  <!-- ======================= BARRE DE COMPTE ======================= -->
-  <div id="accountBar" class="account-bar">
-    <div id="currentProfile" class="current-profile">
-      Pas de profil — <button id="openAccountBtn">Se connecter / Créer</button>
-    </div>
-  </div>
-
-  <!-- ======================= MODAL PROFILS ======================= -->
-  <div id="accountModal" class="modal hidden">
-    <div class="modal-inner">
-      <button class="close-modal" id="closeAccountModal">✕</button>
-
-      <h3>Profils Hoon</h3>
-
-      <section class="modal-section">
-        <h4>Se connecter</h4>
-        <div id="profileList"></div>
-      </section>
-
-      <section class="modal-section">
-        <h4>Créer un profil</h4>
-        <label>Pseudo
-          <input id="newName" placeholder="Ton pseudo">
-        </label>
-        <label>Avatar
-          <select id="avatarSelect">
-            <option value="🟣">🟣 Violet</option>
-            <option value="🐰">🐰 Bunny</option>
-            <option value="🚀">🚀 Rocket</option>
-            <option value="🎮">🎮 Game</option>
-            <option value="😎">😎 Cool</option>
-          </select>
-        </label>
-        <button id="createProfileBtn">Créer le profil</button>
-      </section>
-
-      <section class="modal-section">
-        <h4>Supprimer un profil</h4>
-        <small>Action locale, irréversible.</small>
-        <div id="deleteList"></div>
-      </section>
-
-    </div>
-  </div>
-
-
-  <!-- ======================= SECTION PERSONNALISATION ======================= -->
-  <section id="personaliser" class="reveal">
-    <h2>Personnalisation</h2>
-    <p>Choisissez la couleur principale et le thème clair/sombre.</p>
+  <!-- Accueil -->
+  <section id="home">
+    <h2>Bienvenue sur Hoon !</h2>
+    <p>Amuse-toi, personnalise ton expérience et gagne des HoonCoins.</p>
   </section>
 
+  <!-- Leaderboard -->
+  <section id="leaderboard-section">
+    <h3>Classement Hoon</h3>
 
-  <!-- ======================= MINI-JEU CLICKER ======================= -->
-  <section id="mini-jeu" class="reveal">
-    <h2>Mini-jeu Clicker</h2>
+    <label>Filtrer :
+      <select id="leaderboard-filter">
+        <option value="world">Monde</option>
+        <option value="country">Pays</option>
+        <option value="region">Région</option>
+        <option value="city">Ville</option>
+      </select>
+    </label>
 
-    <button id="clickBtn">Clique-moi !</button>
-
-    <p>Points : <span id="points">0</span></p>
-    <p>Niveau : <span id="level">1</span></p>
-
-    <div id="badge-list"></div>
+    <table id="leaderboard-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Nom</th>
+          <th>HoonCoins</th>
+          <th>Ville</th>
+          <th>Région</th>
+          <th>Pays</th>
+          <th>Badges</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
   </section>
+</main>
 
+<!-- NOTIFICATIONS -->
+<div id="notification-container"></div>
 
-  <!-- ======================= JEU DE CIBLE ======================= -->
-  <section id="target-game" class="reveal">
-    <h2>Jeu de cible</h2>
+<!-- CHAT -->
+<div id="chat-container">
+  <div id="chat-messages"></div>
+  <input type="text" id="chat-input" placeholder="Écrire un message...">
+  <button id="chat-send">Envoyer</button>
+</div>
 
-    <div id="game-area">
-      <div id="target"></div>
-    </div>
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
 
-    <p>Points : <span id="target-points">0</span></p>
-  </section>
+<!-- Script principal -->
+<script src="script.js"></script>
 
-
-  <!-- ======================= HORLOGE ======================= -->
-  <section id="horloge" class="reveal">
-    <h2>Horloge</h2>
-
-    <div id="clock">
-      <span id="hours">00</span> :
-      <span id="minutes">00</span> :
-      <span id="seconds">00</span>
-    </div>
-
-    <p id="date"></p>
-  </section>
-
-
-  <!-- ======================= CHATBOT AVANCÉ ======================= -->
-  <section id="chatbot-advanced" class="reveal">
-    <h2>Chat Hoon (avancé)</h2>
-
-    <div id="chat-advanced-ui">
-
-      <div id="chat-advanced-header">
-        <div id="chat-user-info">Aucun profil</div>
-
-        <div id="chat-controls">
-          <button id="btnOpenTeach">Apprendre</button>
-          <button id="btnResetMemory">Oublier appris</button>
-        </div>
-      </div>
-
-      <div id="chat-advanced-messages"></div>
-
-      <div id="chat-advanced-input">
-        <input id="chatAdvancedInput" placeholder="Écris un message (ou /help)">
-        <button id="chatAdvancedSend">Envoyer</button>
-      </div>
-
-      <div id="teach-panel" class="hidden">
-        <h4>Mode apprentissage</h4>
-        <p>Question ➜ Réponse</p>
-
-        <input id="teachQuestion" placeholder="Question">
-        <input id="teachAnswer" placeholder="Réponse du bot">
-
-        <button id="teachSave">Enregistrer</button>
-        <button id="teachClose">Fermer</button>
-      </div>
-
-    </div>
-  </section>
-
-
-  <!-- ======================= PARAMÈTRES ======================= -->
-  <section id="parametre" class="reveal">
-    <h2>Paramètres</h2>
-    <p>Ajustez vos préférences ici.</p>
-  </section>
-
-
-  <!-- ======================= AIDE ======================= -->
-  <section id="aide" class="reveal">
-    <h2>Aide</h2>
-    <p>Bienvenue dans l’aide du site Hoon.</p>
-  </section>
-
-
-  <!-- ======================= FOOTER ======================= -->
-  <footer>
-    © 2025 Hoon — Tous droits réservés.
-  </footer>
-
-
-  <script src="script.js"></script>
 </body>
 </html>
