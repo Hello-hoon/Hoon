@@ -1,177 +1,161 @@
-// -------------------- THEME --------------------
-const toggle = document.getElementById('theme-toggle');
+/* ===============================
+   COULEUR ET THÈME
+================================= */
+const themeToggle = document.getElementById('theme-toggle');
 const colorPicker = document.getElementById('color-picker');
 
-function applyTheme(theme) {
-  if (theme === 'dark') {
-    document.documentElement.classList.add('dark');
-    toggle.textContent = '☀️';
+themeToggle.addEventListener('click', () => {
+  if(document.body.style.backgroundColor === 'black'){
+    document.body.style.backgroundColor = '#fff';
+    document.body.style.color = '#000';
+    document.documentElement.style.setProperty('--background','#fff');
+    document.documentElement.style.setProperty('--text-color','#000');
   } else {
-    document.documentElement.classList.remove('dark');
-    toggle.textContent = '🌙';
+    document.body.style.backgroundColor = 'black';
+    document.body.style.color = 'white';
+    document.documentElement.style.setProperty('--background','black');
+    document.documentElement.style.setProperty('--text-color','white');
   }
-}
-
-const savedTheme = localStorage.getItem('hoon-theme') || 'light';
-applyTheme(savedTheme);
-
-toggle.addEventListener('click', () => {
-  const newTheme = document.documentElement.classList.contains('dark') ? 'light' : 'dark';
-  applyTheme(newTheme);
-  localStorage.setItem('hoon-theme', newTheme);
 });
-
-// -------------------- COULEUR PRIMAIRE --------------------
-const savedColor = localStorage.getItem('hoon-color') || '#6A0DAD';
-document.documentElement.style.setProperty('--accent', savedColor);
-colorPicker.value = savedColor;
 
 colorPicker.addEventListener('input', () => {
   const color = colorPicker.value;
   document.documentElement.style.setProperty('--accent', color);
+  // Changer la couleur du logo si souhaité
+  const logo = document.querySelector('.logo');
+  if(logo) logo.style.filter = `drop-shadow(0 0 0 ${color})`;
   localStorage.setItem('hoon-color', color);
 });
 
-// -------------------- SCROLL ANIMATION --------------------
-const sections = document.querySelectorAll('.reveal');
-
-function revealSections() {
-  const trigger = window.innerHeight * 0.85;
-  sections.forEach(sec => {
-    const top = sec.getBoundingClientRect().top;
-    if (top < trigger) sec.classList.add('visible');
-  });
+/* ===============================
+   REVEAL SCROLL
+================================= */
+function reveal() {
+  const reveals = document.querySelectorAll('.reveal');
+  for(let i = 0; i < reveals.length; i++){
+    const windowHeight = window.innerHeight;
+    const elementTop = reveals[i].getBoundingClientRect().top;
+    const elementVisible = 150;
+    if(elementTop < windowHeight - elementVisible){
+      reveals[i].classList.add('active');
+    } else {
+      reveals[i].classList.remove('active');
+    }
+  }
 }
+window.addEventListener('scroll', reveal);
 
-window.addEventListener('scroll', revealSections);
-window.addEventListener('load', revealSections);
-window.addEventListener('resize', revealSections);
-
-// -------------------- MINI-JEU CLICKER --------------------
-let points = parseInt(localStorage.getItem('hoon-points')) || 0;
-let level = parseInt(localStorage.getItem('hoon-level')) || 1;
-const btn = document.getElementById('clickBtn');
+/* ===============================
+   MINI-JEU CLICKER
+================================= */
+let points = 0;
+let level = 1;
+const clickBtn = document.getElementById('clickBtn');
 const pointsDisplay = document.getElementById('points');
 const levelDisplay = document.getElementById('level');
-
-// BADGES
 const badgeList = document.getElementById('badge-list');
-const badges = [
-  {name: "Débutant", points: 5},
-  {name: "Intermédiaire", points: 20},
-  {name: "Expert", points: 50},
-  {name: "Maître Hoon", points: 100}
-];
 
-let unlockedBadges = JSON.parse(localStorage.getItem('hoon-badges')) || [];
-
-function updateLevel() {
-  level = Math.floor(Math.sqrt(points / 10)) + 1;
-  levelDisplay.textContent = level;
-}
-
-function updatePoints() {
+clickBtn.addEventListener('click', () => {
+  points++;
   pointsDisplay.textContent = points;
-  localStorage.setItem('hoon-points', points);
-  localStorage.setItem('hoon-level', level);
-}
+  level = Math.floor(points / 10) + 1;
+  levelDisplay.textContent = level;
 
-function updateBadges() {
-  unlockedBadges = [];
-  badges.forEach(b => {
-    if(points >= b.points) unlockedBadges.push(b.name);
-  });
-  localStorage.setItem('hoon-badges', JSON.stringify(unlockedBadges));
-  badgeList.innerHTML = "";
-  unlockedBadges.forEach(name => {
-    const div = document.createElement('div');
-    div.className = "badge";
-    div.textContent = name;
-    badgeList.appendChild(div);
-  });
-}
-
-btn.addEventListener('click', () => {
-  points += 1;
-  updateLevel();
-  updatePoints();
-  updateBadges();
+  if(points === 10){
+    addBadge("Débutant");
+  } else if(points === 50){
+    addBadge("Pro");
+  } else if(points === 100){
+    addBadge("Maître");
+  }
 });
 
-updateLevel();
-updatePoints();
-updateBadges();
+function addBadge(name){
+  const span = document.createElement('span');
+  span.textContent = name;
+  badgeList.appendChild(span);
+}
 
-// -------------------- JEU CIBLE --------------------
-const gameArea = document.getElementById('game-area');
+/* ===============================
+   JEU DE CIBLE
+================================= */
+let targetPoints = 0;
 const target = document.getElementById('target');
 const targetPointsDisplay = document.getElementById('target-points');
 
-let targetPoints = parseInt(localStorage.getItem('hoon-target-points')) || 0;
-
-function moveTarget() {
-  const maxX = gameArea.clientWidth - target.offsetWidth;
-  const maxY = gameArea.clientHeight - target.offsetHeight;
+function moveTarget(){
+  const gameArea = document.getElementById('game-area');
+  const maxX = gameArea.clientWidth - target.clientWidth;
+  const maxY = gameArea.clientHeight - target.clientHeight;
   const x = Math.floor(Math.random() * maxX);
   const y = Math.floor(Math.random() * maxY);
-  target.style.left = x + "px";
-  target.style.top = y + "px";
+  target.style.left = x + 'px';
+  target.style.top = y + 'px';
 }
 
 target.addEventListener('click', () => {
-  targetPoints += 1;
+  targetPoints++;
   targetPointsDisplay.textContent = targetPoints;
-  localStorage.setItem('hoon-target-points', targetPoints);
   moveTarget();
 });
-
-targetPointsDisplay.textContent = targetPoints;
 moveTarget();
 
-// -------------------- HORLOGE --------------------
-function updateClock() {
+/* ===============================
+   HORLOGE ET DATE
+================================= */
+function updateClock(){
   const now = new Date();
-  const h = String(now.getHours()).padStart(2,'0');
-  const m = String(now.getMinutes()).padStart(2,'0');
-  const s = String(now.getSeconds()).padStart(2,'0');
-
-  document.getElementById('hours').textContent = h;
-  document.getElementById('minutes').textContent = m;
-  document.getElementById('seconds').textContent = s;
-
-  const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-  document.getElementById('date').textContent = now.toLocaleDateString('fr-FR', options);
+  document.getElementById('hours').textContent = String(now.getHours()).padStart(2,'0');
+  document.getElementById('minutes').textContent = String(now.getMinutes()).padStart(2,'0');
+  document.getElementById('seconds').textContent = String(now.getSeconds()).padStart(2,'0');
+  document.getElementById('date').textContent = now.toLocaleDateString();
 }
-
 setInterval(updateClock, 1000);
 updateClock();
 
-// -------------------- CHATBOT --------------------
+/* ===============================
+   CHAT SIMPLE
+================================= */
 const chatInput = document.getElementById('chat-input');
 const chatMessages = document.getElementById('chat-messages');
 
-function addMessage(text, isUser=false) {
-  const div = document.createElement('div');
-  div.textContent = text;
-  div.style.marginBottom = "5px";
-  div.style.textAlign = isUser ? "right" : "left";
-  chatMessages.appendChild(div);
-  chatMessages.scrollTop = chatMessages.scrollHeight;
-}
+chatInput.addEventListener('keydown', function(e){
+  if(e.key === 'Enter'){
+    const msg = chatInput.value.trim();
+    if(msg !== ''){
+      const p = document.createElement('p');
+      p.textContent = "Vous : " + msg;
+      chatMessages.appendChild(p);
+      chatInput.value = '';
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+      // Réponse automatique simple
+      const botP = document.createElement('p');
+      botP.textContent = "HoonBot : Merci pour ton message !";
+      chatMessages.appendChild(botP);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+  }
+});
 
-chatInput.addEventListener('keypress', function(e){
-  if(e.key === 'Enter' && chatInput.value.trim() !== '') {
-    const userMsg = chatInput.value.trim();
-    addMessage(userMsg, true);
-    chatInput.value = '';
+/* ===============================
+   HAMBURGER MENU
+================================= */
+const hamburger = document.getElementById('hamburger');
+const menuDropdown = document.getElementById('menuDropdown');
 
-    let reply = "Désolé, je n'ai pas compris 😅";
-    const msg = userMsg.toLowerCase();
-    if(msg.includes('bonjour')) reply = "Salut ! 😃";
-    else if(msg.includes('point')) reply = `Tu as ${points} points !`;
-    else if(msg.includes('niveau')) reply = `Ton niveau est ${level} !`;
-    else if(msg.includes('badge')) reply = `Badges : ${unlockedBadges.join(', ')}`;
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('active');
+  if(menuDropdown.style.display === 'block') {
+    menuDropdown.style.display = 'none';
+  } else {
+    menuDropdown.style.display = 'block';
+  }
+});
 
-    setTimeout(() => addMessage(reply), 500);
+// Fermer menu si clic à l’extérieur
+document.addEventListener('click', function(event) {
+  if(!hamburger.contains(event.target) && !menuDropdown.contains(event.target)) {
+    menuDropdown.style.display = 'none';
+    hamburger.classList.remove('active');
   }
 });
