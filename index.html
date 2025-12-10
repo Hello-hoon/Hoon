@@ -17,12 +17,16 @@
       <ul class="menu">
         <li><a href="#accueil">Accueil</a></li>
         <li><a href="#projets">Projets</a></li>
+        <li><a href="#mini-jeu">Mini-jeu</a></li>
+        <li><a href="#target-game">Cible</a></li>
+        <li><a href="#horloge">Horloge</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
     </nav>
 
     <div class="header-right">
       <button id="theme-toggle" aria-label="Basculer thème">🌙</button>
+      <input type="color" id="color-picker" title="Choisir couleur primaire" value="#6A0DAD">
     </div>
   </header>
 
@@ -36,6 +40,38 @@
     <p>Découvrez mes projets tech, web et Minecraft.</p>
   </section>
 
+  <section id="mini-jeu" class="reveal">
+    <h2>Mini-jeu Clicker Hoon</h2>
+    <p>Cliquez sur le bouton pour gagner des points !</p>
+    <button id="clickBtn">Cliquez-moi !</button>
+    <p>Points : <span id="points">0</span></p>
+    <p>Niveau : <span id="level">1</span></p>
+    <div id="badges">
+      <h3>Badges débloqués :</h3>
+      <div id="badge-list"></div>
+    </div>
+  </section>
+
+  <section id="target-game" class="reveal">
+    <h2>Jeu de cible Hoon</h2>
+    <p>Clique sur la cible pour gagner des points !</p>
+    <div id="game-area">
+      <div id="target"></div>
+    </div>
+    <p>Points : <span id="target-points">0</span></p>
+  </section>
+
+  <section id="horloge" class="reveal">
+    <h2>Horloge Hoon</h2>
+    <p>Heure et date en temps réel :</p>
+    <div id="clock">
+      <span id="hours">00</span> :
+      <span id="minutes">00</span> :
+      <span id="seconds">00</span>
+    </div>
+    <p id="date"></p>
+  </section>
+
   <section id="contact" class="reveal">
     <h2>Contact</h2>
     <p>Mes réseaux seront bientôt disponibles.</p>
@@ -44,6 +80,12 @@
   <footer>
     © 2025 Hoon — Tous droits réservés.
   </footer>
+
+  <div id="chatbot">
+    <div id="chat-header">Chat Hoon 💬</div>
+    <div id="chat-messages"></div>
+    <input type="text" id="chat-input" placeholder="Écris un message...">
+  </div>
 
   <script src="script.js"></script>
 </body>
