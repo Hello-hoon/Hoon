@@ -1,7 +1,7 @@
+
 // -------------------- THEME --------------------
 const toggle = document.getElementById('theme-toggle');
 
-// Appliquer thème enregistré
 function applyTheme(theme) {
   if (theme === 'dark') {
     document.documentElement.classList.add('dark');
@@ -12,21 +12,19 @@ function applyTheme(theme) {
   }
 }
 
-// Charger le thème au démarrage
-const saved = localStorage.getItem('hoon-theme') || 'light';
-applyTheme(saved);
+const savedTheme = localStorage.getItem('hoon-theme') || 'light';
+applyTheme(savedTheme);
 
-// Bouton changement de thème
 toggle.addEventListener('click', () => {
   const newTheme = document.documentElement.classList.contains('dark') ? 'light' : 'dark';
   applyTheme(newTheme);
   localStorage.setItem('hoon-theme', newTheme);
 });
 
-// -------------------- ANIMATION SCROLL --------------------
+// -------------------- SCROLL ANIMATION --------------------
 const sections = document.querySelectorAll('section');
 
-function showSections() {
+function revealSections() {
   const trigger = window.innerHeight * 0.85;
 
   sections.forEach(sec => {
@@ -35,6 +33,6 @@ function showSections() {
   });
 }
 
-window.addEventListener('scroll', showSections);
-window.addEventListener('resize', showSections);
-document.addEventListener('DOMContentLoaded', showSections);
+window.addEventListener('scroll', revealSections);
+window.addEventListener('load', revealSections);
+window.addEventListener('resize', revealSections);
