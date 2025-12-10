@@ -1,42 +1,41 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #ffffff; /* fond blanc */
-    color: #333;
+    background: #ffffff;
+    color: #222;
     margin: 0;
     padding: 0;
 }
 
-/* HEADER (barre violette en haut) */
+/* HEADER MODERNE */
 header {
-    background-color: #6A0DAD; /* violet */
-    padding: 15px;
+    background-color: #6A0DAD;
+    height: 80px;
     display: flex;
-    justify-content: center;
     align-items: center;
+    padding: 0 40px;
+    justify-content: space-between;
 }
 
-/* LOGO */
 .logo {
-    height: 60px;
+    height: 55px;
 }
 
 /* MENU */
 .menu {
     display: flex;
-    margin-left: 20px;
     list-style: none;
-    padding: 0;
+    margin: 0;
 }
 
 .menu li {
-    margin: 0 15px;
+    margin-left: 25px;
 }
 
 .menu a {
-    color: #fff; /* texte menu blanc */
+    color: #fff;
     text-decoration: none;
     font-weight: bold;
-    transition: all 0.3s ease;
+    transition: 0.3s;
     position: relative;
 }
 
@@ -45,32 +44,56 @@ header {
     transform: scale(1.1);
 }
 
+/* LIGNE ANIMÉE */
 .menu a::after {
-    content: '';
-    display: block;
+    content: "";
     width: 0;
     height: 3px;
     background: #ffdd00;
-    transition: width 0.3s;
-    margin-top: 5px;
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    transition: 0.3s;
 }
 
 .menu a:hover::after {
     width: 100%;
 }
 
-/* SECTIONS BLANCHES */
+/* SECTIONS AVEC ANIMATION */
 section {
-    background-color: #ffffff;
+    background: #ffffff;
     text-align: center;
-    padding: 60px 20px;
+    padding: 80px 20px;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.6s ease-out;
 }
 
-/* FOOTER VIOLET EN BAS */
+section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ZONE PUB */
+.ad-zone {
+    width: 100%;
+    max-width: 900px;
+    height: 120px;
+    background: #ddd;
+    margin: 40px auto;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+    font-size: 18px;
+}
+
+/* FOOTER */
 footer {
-    background-color: #6A0DAD;
+    background: #6A0DAD;
     color: #fff;
     text-align: center;
-    padding: 20px;
-    margin-top: 40px;
+    padding: 30px;
 }
