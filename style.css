@@ -33,7 +33,7 @@ header {
 
 .logo {
   height: 55px;
-  transition: filter 0.3s ease;
+  transition: fill 0.3s ease;
 }
 
 /* NAV MENU */
