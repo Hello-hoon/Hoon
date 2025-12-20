@@ -1,90 +1,51 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hoon</title>
+  <meta charset="UTF-8">
+  <title>Hoon</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- Style principal -->
-<link rel="stylesheet" href="style.css">
+  <!-- Style principal -->
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
 <!-- HEADER -->
 <header>
   <h1 id="site-title">Hoon</h1>
 
-  <!-- Icône menu -->
+  <!-- Menu hamburger -->
   <div id="menu-toggle">&#9776;</div>
 
   <!-- Menu latéral -->
   <nav id="menu">
     <ul>
-      <li id="menu-personalize">Personnaliser</li>
-      <li id="menu-games">Jeux</li>
-      <li id="menu-shop">Boutique</li>
-      <li id="menu-leaderboard">Classement</li>
-      <li id="menu-help">Aide</li>
+      <li>Accueil</li>
+      <li>Personnalisation</li>
+      <li>Paramètres</li>
+      <li>Aide</li>
     </ul>
   </nav>
 </header>
 
 <!-- CONTENU PRINCIPAL -->
 <main>
+  <section id="empty-state">
+    <h2>Il n’y a rien ici pour le moment</h2>
+    <p>
+      Hoon est actuellement en développement.<br>
+      De nouvelles fonctionnalités arrivent bientôt.
+    </p>
 
-  <!-- Accueil -->
-  <section id="home">
-    <h2>Bienvenue sur Hoon !</h2>
-    <p>Amuse-toi, personnalise ton expérience et gagne des HoonCoins.</p>
-  </section>
-
-  <!-- Leaderboard -->
-  <section id="leaderboard-section">
-    <h3>Classement Hoon</h3>
-
-    <label>Filtrer :
-      <select id="leaderboard-filter">
-        <option value="world">Monde</option>
-        <option value="country">Pays</option>
-        <option value="region">Région</option>
-        <option value="city">Ville</option>
-      </select>
-    </label>
-
-    <table id="leaderboard-table">
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Nom</th>
-          <th>HoonCoins</th>
-          <th>Ville</th>
-          <th>Région</th>
-          <th>Pays</th>
-          <th>Badges</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
+    <!-- CLICKER -->
+    <div id="clicker">
+      <p>HoonCoins : <span id="coins">0</span></p>
+      <button id="click-btn">Cliquer</button>
+    </div>
   </section>
 </main>
 
-<!-- NOTIFICATIONS -->
-<div id="notification-container"></div>
-
-<!-- CHAT -->
-<div id="chat-container">
-  <div id="chat-messages"></div>
-  <input type="text" id="chat-input" placeholder="Écrire un message...">
-  <button id="chat-send">Envoyer</button>
-</div>
-
-<!-- Firebase -->
-<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
-
-<!-- Script principal -->
+<!-- SCRIPT -->
 <script src="script.js"></script>
 
 </body>
